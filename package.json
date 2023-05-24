@@ -3,5 +3,9 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
+  },
+  "dependencies": {
+    "markdown-it": "^13.0.1",
+    "marked": "^5.0.2"
   }
 }
