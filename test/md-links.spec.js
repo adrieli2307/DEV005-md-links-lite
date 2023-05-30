@@ -1,8 +1,9 @@
 const fs = require('fs');
 const { pathValid } = require('../src/funcionespath');
 const filemd = require('../src/readDoc');
+const archiDoc = require ('../src/fileArchiv');
 
- // Test ruta existente 
+ /* -------------------------- Test ruta existente ---------------------------*/
 describe('pathValid', () => {
   it('debería devolver true si la ruta existe', () => {
     const existPath = './src/hello-world.md';
@@ -21,7 +22,9 @@ describe('pathValid', () => {
   });
 });
 
-// Test de validacion archivo .md
+
+/* -------------------------- Test de validacion archivo .md ---------------------------*/
+
 describe('filemd', () => {
   test('debería leer el contenido del archivo .md', async () => {
     const filePath = './src/hello-world.md';
@@ -29,10 +32,7 @@ describe('filemd', () => {
     // Llama a la función filemd con el filePath
     await filemd(filePath);
 
-    // No es necesario verificar la salida en la consola directamente
-
-    // Asegúrate de que no haya errores durante la ejecución
-    expect.assertions(0);
+     expect.assertions(0);
   });
 
   test('debería mostrar un mensaje de error para un archivo que no es .md', async () => {
@@ -41,10 +41,7 @@ describe('filemd', () => {
     // Llama a la función filemd con el filePath
     await filemd(filePath);
 
-    // No es necesario verificar la salida en la consola directamente
-
-    // Asegúrate de que no haya errores durante la ejecución
-    expect.assertions(0);
+     expect.assertions(0);
   });
 
    test('debería mostrar un mensaje de error para una ruta inválida o inexistente', () => {
@@ -63,3 +60,29 @@ describe('filemd', () => {
 });
 
 
+/* -------------------------- Test de archivo  ---------------------------*/
+
+const MarkdownIt = require('markdown-it');
+
+describe('archiDoc', () => {
+  test('debería extraer los links del archivo Markdown', async () => {
+    const filePath = './src/hello-world.md';
+
+    const fileContent = `This is a [link](https://example.com) inside a Markdown file`;
+
+    jest.spyOn(fs.promises, 'readFile').mockResolvedValue(fileContent);
+
+    const consoleLog = console.log;
+    console.log = jest.fn();
+
+    await archiDoc(filePath);
+
+    expect(console.log).toHaveBeenCalledWith([{
+      href: 'https://example.com',
+      text: '',
+      file: path.resolve(filePath)
+    }]);
+
+    console.log = consoleLog;
+  });
+});
