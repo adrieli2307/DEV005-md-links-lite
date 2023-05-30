@@ -2,6 +2,7 @@ const fs = require('fs');
 const { pathValid } = require('../src/funcionespath');
 const filemd = require('../src/readDoc');
 const archiDoc = require ('../src/fileArchiv');
+const path = require("path")
 
  /* -------------------------- Test ruta existente ---------------------------*/
 describe('pathValid', () => {
@@ -62,8 +63,6 @@ describe('filemd', () => {
 
 /* -------------------------- Test de archivo  ---------------------------*/
 
-const MarkdownIt = require('markdown-it');
-
 describe('archiDoc', () => {
   test('debería extraer los links del archivo Markdown', async () => {
     const filePath = './src/hello-world.md';
@@ -78,7 +77,7 @@ describe('archiDoc', () => {
     await archiDoc(filePath);
 
     expect(console.log).toHaveBeenCalledWith([{
-      href: 'https://example.com',
+      href: 'https://github.com/krlosh/learnyounode_ejercicios',
       text: '',
       file: path.resolve(filePath)
     }]);
