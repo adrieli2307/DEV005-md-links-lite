@@ -67,20 +67,21 @@ describe('archiDoc', () => {
   test('debería extraer los links del archivo Markdown', async () => {
     const filePath = './src/hello-world.md';
 
-    const fileContent = `This is a [link](https://example.com) inside a Markdown file`;
-
-    jest.spyOn(fs.promises, 'readFile').mockResolvedValue(fileContent);
+    const fileContent = `This is a [link](https://github.com/krlosh/learnyounode_ejercicios) inside a Markdown file`;
 
     const consoleLog = console.log;
     console.log = jest.fn();
+    jest.spyOn(fs.promises,"readFile").mockResolvedValue(fileContent)
+    const resultado =  await  archiDoc(filePath);
+    
 
-    await archiDoc(filePath);
-
-    expect(console.log).toHaveBeenCalledWith([{
-      href: 'https://github.com/krlosh/learnyounode_ejercicios',
-      text: '',
-      file: path.resolve(filePath)
-    }]);
+    expect(resultado).toEqual([
+      {
+        href: 'https://github.com/krlosh/learnyounode_ejercicios',
+        text: 'link',
+        file: path.resolve(filePath),
+      },
+    ]);
 
     console.log = consoleLog;
   });
