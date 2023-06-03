@@ -2,7 +2,7 @@ const fs = require("fs")
 const path = require("path")
 const MarkdownIt = require("markdown-it")
 
-const filePath = process.argv[2]
+//const filePath = process.argv[2]
 
 
 // Extraer los archivos 
@@ -23,7 +23,7 @@ const archiDoc = (route) => {
 					file: routeAbsolute,
 				}))
   
-			console.log(links)
+			console.log("link",links)
 			return links
 		})
 		.catch((error) => {
@@ -32,5 +32,5 @@ const archiDoc = (route) => {
 		})
 }
 
-archiDoc(filePath)
+//archiDoc(filePath)
 module.exports = archiDoc

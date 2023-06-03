@@ -1,43 +1,50 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 const archiDoc = require ("../src/fileArchiv")
 const filemd = require ("../src/readDoc")
 
-const mdlinks = (route, objOption) => {
-	console.log(objOption === undefined ? "Solo extraer links" : "Vamos a validar los links")
-	
-	return archiDoc(route)
-		.then((links) => {
-			if (objOption && objOption.validate) {
-				const validatedLinks = links.map((link) => {
-					const { href, text, file } = link
-					return filemd.validateLink(href)
-						.then((result) => ({
-							href,
-							text,
-							file,
-							status: result.status,
-							ok: result.ok,
-						}))
-						.catch((error) => ({
-							href,
-							text,
-							file,
-							status: 0,
-							ok: "fail",
-							error,
-						}))
-				})
+const filePath = process.argv[2]
 
-				return Promise.all(validatedLinks)
-			} else {
-				return links
-			}
-		})
+const mdlinks = (route, objOption) => {
+	return new Promise ((resolve)=>{
+		console.log(objOption === undefined ? "Solo extraer links" : "Vamos a validar los links")
+	
+		 archiDoc(route)
+			.then((links) => {
+				if (objOption && objOption.validate) {
+					const validatedLinks = links.map((link) => {
+						const { href, text, file } = link
+						return filemd.validateLink(href)
+							.then((result) => ({
+								href,
+								text,
+								file,
+								status: result.status,
+								ok: result.ok,
+							}))
+							.catch((error) => ({
+								href,
+								text,
+								file,
+								status: 0,
+								ok: "fail",
+								error,
+							}))
+					})
+  
+					Promise.all(validatedLinks).then((linksarray)=>{
+						resolve(linksarray)
+					})
+				} else {
+					resolve (links)
+				}
+			})
+	})
+	
 }
 
-mdlinks("./validate.js")
-	.then((result) => {
-		console.log(result) // Imprimir los resultados obtenidos
-	})
-	.catch((error) => {
-		console.log(error) // Manejar el error en caso de que ocurra
-	})
+mdlinks(filePath).then((result)=>{
+	console.log("resultado",result)
+}).catch((error)=>{
+	console.error(error)
+})
+module.exports = mdlinks

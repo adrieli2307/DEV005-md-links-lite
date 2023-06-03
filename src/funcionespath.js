@@ -5,8 +5,8 @@ const path = require("path")
 const existPath = process.argv[2]
 
 // Función para validar las rutas 
+
 const pathValid = (filePath) => {
-	console.log(filePath)
 	const exists = fs.existsSync(filePath)
 	console.log(exists ? "Sí existe" : "No existe")
 	return exists
