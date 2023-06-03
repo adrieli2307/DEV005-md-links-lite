@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const path = require("path")
-const { pathValid } = require("./funcionespath")
+
 
 const filePath = process.argv[2]
 
@@ -8,18 +8,17 @@ const filePath = process.argv[2]
 
 const filemd = (route) => {
 	return new Promise((resolve, reject) => {
-	  if (path.extname(route) !== ".md") {
-			reject("Ruta inválida o inexistente")
-			return
-	  }
-	  if (path.extname(route) === ".md") {
+	    if (path.extname(route) !== ".md") {
+			reject("El archivo no tiene la extensión .md o la ruta es inválida")
+		  } else {
 			resolve("El archivo tiene la extensión .md")
-	  } else {
-			reject("El archivo no tiene la extensión .md")
-	  }
+		  }
 	})
-}
-  
+	  }
+	  
+
 filemd(filePath)
+	  .then((result) => console.log(result))
+	  .catch((error) => console.error(error))
 
 module.exports = filemd
