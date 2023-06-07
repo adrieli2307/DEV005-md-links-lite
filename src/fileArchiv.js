@@ -30,14 +30,10 @@ const archiDoc = (pathFile) => {
 archiDoc(filePath)
 	.then((links) => {
 	  if (Array.isArray(links) && links.length > 0) {
-			console.log(links)
-	  } else {
-			console.log("No existen enlaces")
-	  }
+			//console.log(links)
+	  } 
 	})
-	.catch((error) => {
-	  console.log("Error:", error)
-	})
+	.catch(() => {})
   
 
 archiDoc(filePath)

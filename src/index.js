@@ -2,11 +2,12 @@
 const archiDoc = require ("../src/fileArchiv")
 const filemd = require ("../src/readDoc")
 
+
 const filePath = process.argv[2]
 
 const mdlinks = (route, objOption) => {
 	return new Promise ((resolve)=>{
-		console.log(objOption === undefined ? "Solo extraer links" : "Vamos a validar los links")
+		//console.log(objOption === undefined ? "Solo extraer links" : "Vamos a validar los links")
 	
 		 archiDoc(route)
 			.then((links) => {

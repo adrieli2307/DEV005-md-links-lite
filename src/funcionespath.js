@@ -8,7 +8,7 @@ const existPath = process.argv[2]
 
 const pathValid = (filePath) => {
 	const exists = fs.existsSync(filePath)
-	console.log(exists ? "Sí existe" : "No existe")
+	//console.log(exists ? "Sí existe" : "No existe")
 	return exists
 }
 
@@ -16,10 +16,10 @@ const pathValid = (filePath) => {
 
 const absolutePath = (existPath) => {
 	if (path.isAbsolute(existPath)) {
-		console.log("La ruta ya es absoluta")
+		//console.log("La ruta ya es absoluta")
 		return existPath
 	} else {
-		console.log("Convirtiendo la ruta en absoluta")
+		//console.log("Convirtiendo la ruta en absoluta")
 		return path.resolve(existPath)
 	}
 }

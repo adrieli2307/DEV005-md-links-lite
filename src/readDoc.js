@@ -2,6 +2,7 @@
 const path = require("path")
 
 
+
 const filePath = process.argv[2]
 
 // Existencia de un archivo .md
@@ -16,9 +17,10 @@ const filemd = (route) => {
 	})
 	  }
 	  
-
 filemd(filePath)
-	  .then((result) => console.log(result))
-	  .catch((error) => console.error(error))
+	  .then((result) => (result))
+	  .catch((error) => (error))
+
+	  
 
 module.exports = filemd
