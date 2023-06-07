@@ -3,7 +3,7 @@ const fs = require("fs")
 const path = require("path")
 
 
-const existPath = process.argv[2]
+const filePath = process.argv[2]
 
 // Función para validar las rutas 
 
@@ -21,9 +21,7 @@ const pathValid = (filePath) => {
 }
 
 
-
-
-pathValid(existPath)
+pathValid(filePath)
 
 
 
