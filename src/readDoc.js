@@ -1,8 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const path = require("path")
 
-
-
 const filePath = process.argv[2]
 
 // Existencia de un archivo .md

@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const axios = require ("axios")
-const archiDoc= require ("./fileArchiv")
+const archiDoc = require ("./fileArchiv")
 
 const validate = (objLinks) => {
 	const linkVali = objLinks.map((objLink) =>
