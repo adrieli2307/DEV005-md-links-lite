@@ -1,26 +1,25 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const axios = require ("axios")
-const archiDoc = require ("./fileArchiv")
+/*const archiDoc = require ("./fileArchiv")*/
 
-const validate = (objLinks) => {
-	const linkVali = objLinks.map((objLink) =>
-	  axios
-			.head(objLink.href)
-			.then((response) => ({
-		  ...objLink,
+const validate = (links) => {
+	const linkVali = links.map((link) =>axios
+		.head(link.href)
+		.then((response) => ({
+		  ...link,
 		  status: response.status,
 		  ok: response.status >= 200 && response.status < 400,
-			}))
-			.catch(() => ({
-		  ...objLink,
+		}))
+		.catch(() => ({
+		  ...link,
 		  status: 404,
 		  ok: false,
-			}))
+		}))
 	)
 	return Promise.all(linkVali)
 }
   
-const ruta = "./hello-world.md"
+/*const ruta = "./hello-world.md"
   
 archiDoc(ruta)
 	.then((objLinks) => {
@@ -36,9 +35,11 @@ archiDoc(ruta)
 	})
 	.catch((error) => {
 	  console.log("Error de validación", error)
-	})
-  
-module.exports = validate
+	})*/
+
+module.exports = {
+	validate,
+}
 
 
 

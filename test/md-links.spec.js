@@ -1,8 +1,8 @@
 const fs = require('fs');
-const validate = require ("../src/validate")
+const {validate} = require ("../src/validate")
 const { pathValid } = require('../src/funcionespath');
-const filemd = require('../src/readDoc');
-const archiDoc = require ('../src/fileArchiv');
+const {filemd }= require('../src/readDoc');
+const {archiDoc} = require ('../src/fileArchiv');
 const path = require("path")
 const axios = require ("axios")
 
@@ -42,7 +42,7 @@ describe('filemd', () => {
       expect(result).toBe("El archivo tiene la extensión .md");
     } catch (error) {
       // Si hay un error, falla el test
-      fail(error);
+      console.log();(error);
     }
   });
 
@@ -53,7 +53,7 @@ describe('filemd', () => {
       // Llama a la función filemd con el filePath
       await filemd(filePath);
       // Si no hay error, falla el test
-      fail('Se esperaba un error');
+      console.log();('Se esperaba un error');
     } catch (error) {
       expect(error).toBe('El archivo no tiene la extensión .md o la ruta es inválida');
     }

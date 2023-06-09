@@ -26,5 +26,5 @@ pathValid(filePath)
 
 
 module.exports = {
-	pathValid
+	pathValid,
 }

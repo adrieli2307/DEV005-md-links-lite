@@ -1,10 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+
 const path = require("path")
 
 const filePath = process.argv[2]
 
 // Existencia de un archivo .md
-
 const filemd = (route) => {
 	return new Promise((resolve, reject) => {
 	    if (path.extname(route) !== ".md") {
@@ -14,11 +14,12 @@ const filemd = (route) => {
 		  }
 	})
 	  }
-	  
-filemd(filePath)
+	  filemd(filePath)
 	  .then((result) => (result))
 	  .catch((error) => (error))
 
 	  
 
-module.exports = filemd
+module.exports = {
+	filemd,
+}

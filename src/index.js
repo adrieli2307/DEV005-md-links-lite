@@ -1,15 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-const archiDoc = require ("../src/fileArchiv")
-const filemd = require ("../src/readDoc")
-const validate = require ("./validate")
+const {archiDoc} = require ("../src/fileArchiv")
+const {filemd} = require ("../src/readDoc")
+const {validate} = require ("./validate")
 const {pathValid} = require ("./funcionespath")
 
 
-
-
-const filePath = process.argv[2]
-
-const mdlinks = (route, objOption) => {
+const mdlinks = (filePath, options = {}) => {
 	return new Promise((resolve, reject) => {
 	  const absolutePath = pathValid(filePath)
 	  if (!absolutePath) {
@@ -17,19 +13,31 @@ const mdlinks = (route, objOption) => {
 			return
 	  }
 	  filemd(absolutePath)
-			.then((fileExtrac) => {
-		  archiDoc(fileExtrac, absolutePath)
-					.then((links) => {
-			  if (objOption.validate) {
-							validate(links)
-				  .then((validatedLinks) => resolve(validatedLinks))
-				  .catch((error) => reject(error))
+			.then((fileContent) => {
+		  archiDoc(fileContent, absolutePath)
+		 .then((links) => {
+			  if (Array.isArray(links) && links.length > 0) {
+			  if (options.validate) {
+				  validate(links)
+									.then((validate) => resolve(validate))
+							} else {
+				  resolve(links)
+							}
 			  } else {
-							resolve(links)
+							resolve("No existen enlaces")
 			  }
 					})
 					.catch((error) => reject(error))
 			})
 	})
 }
-module.exports = mdlinks
+mdlinks("hello-world.md", {validate:true})
+	.then((links)=>{
+		console.log(links)
+	}).catch((error)=>{
+		console.error(error)
+	})
+
+module.exports = {
+	mdlinks,
+}

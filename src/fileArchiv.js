@@ -26,15 +26,9 @@ const archiDoc = (pathFile) => {
 	  })
 	})
 }
-  
+// Llamar a la función archiDoc y manejar la promesa resultante
 archiDoc(filePath)
-	.then((links) => {
-	  if (Array.isArray(links) && links.length > 0) {
-			//console.log(links)
-	  } 
-	})
-	.catch(() => {})
-  
 
-archiDoc(filePath)
-module.exports = archiDoc
+module.exports = {
+	archiDoc,
+}
