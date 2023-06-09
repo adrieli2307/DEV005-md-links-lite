@@ -11,7 +11,7 @@ const axios = require ("axios")
  /* -------------------------- Test ruta existente ---------------------------*/
  describe('pathValid', () => {
   it('debería devolver true si la ruta existe', () => {
-    const existPath = './src/hello-world.md';
+    const existPath = 'C:\\Users\\adri_\\Desktop\\Portafolio JS\\Laboratoria\\DEV005-md-links-lite\\src\\hello-world.md';
 
     const result = pathValid(existPath);
 
@@ -26,9 +26,7 @@ const axios = require ("axios")
 
     expect(result).toBe(expectedPath);
   });
-
 });
-
 
 /* -------------------------- Test de validacion archivo .md ---------------------------*/
 

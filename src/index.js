@@ -31,12 +31,7 @@ const mdlinks = (filePath, options = {}) => {
 			})
 	})
 }
-mdlinks("hello-world.md", {validate:true})
-	.then((links)=>{
-		console.log(links)
-	}).catch((error)=>{
-		console.error(error)
-	})
+
 
 module.exports = {
 	mdlinks,
