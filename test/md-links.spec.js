@@ -72,19 +72,32 @@ describe('archiDoc', () => {
     const consoleLog = console.log;
     console.log = jest.fn();
 
-    await archiDoc(filePath);
-
-    if (Array.isArray(links) && links.length > 0) {
-      expect(console.log).toHaveBeenCalledWith([
+    const result =   await archiDoc(filePath);
+  
+      expect(result).toEqual([
         {
           href: 'https://github.com/krlosh/learnyounode_ejercicios',
-          text: 'hola',
+          text: 'link',
           file: path.resolve(filePath)
+        },
+        {
+          href: "https://lucid.app/lucidchart/a3d0479b-13d3-4337-82c7-5d69088ed72f/edit?beaconFlowId=C2583C497EEEC5CE&invitationId=inv_be404150-2611-4303-b9bf-dfdda156e7a1&page=0_0#", 
+          text: "hola",
+          file: path.resolve(filePath)
+        },
+        {
+        href: "https://es.wikipedia.org/wiki/Markdown",
+        text: "Markdown",
+        file: path.resolve(filePath)
+        },
+        {
+        href: "https://nodejs.com/api/fs.html#fsfstatsyncfd-optio",
+        text: "Video",
+        file: path.resolve(filePath)
         }
+
       ]);
-    } else {
-      expect(console.log).not.toHaveBeenCalled();
-    }
+  
 
     console.log = consoleLog;
   });
@@ -173,5 +186,3 @@ describe('validate', () => {
     axios.head.mockRestore();
   });
 });
-
-

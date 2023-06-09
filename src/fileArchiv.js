@@ -4,7 +4,7 @@ const fs = require("fs")
 const path = require("path")
 
 
-const filePath = process.argv[2]
+//const filePath = process.argv[2]
 
 
 // Extraer los archivos
@@ -27,7 +27,7 @@ const archiDoc = (pathFile) => {
 	})
 }
 // Llamar a la función archiDoc y manejar la promesa resultante
-archiDoc(filePath)
+//archiDoc(filePath)
 
 module.exports = {
 	archiDoc,

@@ -5,12 +5,3 @@ Hola mundo
 [Markdown](https://es.wikipedia.org/wiki/Markdown)
 
 [Video](https://nodejs.com/api/fs.html#fsfstatsyncfd-optio)
-
-href: "https://github.com/krlosh/learnyounode_ejercicios",
-text: "hola",
-file: "C:\\Users\\adri_\\Desktop\\Portafolio JS\\Laboratoria\\DEV005-md-links-lite\\src\\hello-world.md",
-
-[texto](href)
-
-Enlace: [hola](https://github.com/krlosh/learnyounode_ejercicios)
-Archivo: C:\Users\adri_\Desktop\Portafolio JS\Laboratoria\DEV005-md-links-lite\src\hello-world.md
