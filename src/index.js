@@ -1,43 +1,38 @@
-const archiDoc = require ("../src/fileArchiv")
-const filemd = require ("../src/readDoc")
+/* eslint-disable no-mixed-spaces-and-tabs */
+const {archiDoc} = require ("../src/fileArchiv")
+const {filemd} = require ("../src/readDoc")
+const {validate} = require ("./validate")
+const {pathValid} = require ("./funcionespath")
 
-const mdlinks = (route, objOption) => {
-	console.log(objOption === undefined ? "Solo extraer links" : "Vamos a validar los links")
-	
-	return archiDoc(route)
-		.then((links) => {
-			if (objOption && objOption.validate) {
-				const validatedLinks = links.map((link) => {
-					const { href, text, file } = link
-					return filemd.validateLink(href)
-						.then((result) => ({
-							href,
-							text,
-							file,
-							status: result.status,
-							ok: result.ok,
-						}))
-						.catch((error) => ({
-							href,
-							text,
-							file,
-							status: 0,
-							ok: "fail",
-							error,
-						}))
-				})
 
-				return Promise.all(validatedLinks)
-			} else {
-				return links
-			}
-		})
+const mdlinks = (filePath, options = {}) => {
+	return new Promise((resolve, reject) => {
+	  const absolutePath = pathValid(filePath)
+	  if (!absolutePath) {
+			reject(new Error("Ruta inexistente"))
+			return
+	  }
+	  filemd(absolutePath)
+			.then((fileContent) => {
+		  archiDoc(fileContent, absolutePath)
+		 .then((links) => {
+			  if (Array.isArray(links) && links.length > 0) {
+			  if (options.validate) {
+				  validate(links)
+									.then((validate) => resolve(validate))
+							} else {
+				  resolve(links)
+							}
+			  } else {
+							resolve("No existen enlaces")
+			  }
+					})
+					.catch((error) => reject(error))
+			})
+	})
 }
 
-mdlinks("./validate.js")
-	.then((result) => {
-		console.log(result) // Imprimir los resultados obtenidos
-	})
-	.catch((error) => {
-		console.log(error) // Manejar el error en caso de que ocurra
-	})
+
+module.exports = {
+	mdlinks,
+}
