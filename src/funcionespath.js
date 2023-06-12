@@ -3,7 +3,6 @@ const fs = require("fs")
 const path = require("path")
 
 
-
 // Función para validar las rutas 
 
 const pathValid = (filePath) => {
