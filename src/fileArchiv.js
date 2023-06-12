@@ -4,8 +4,6 @@ const fs = require("fs")
 const path = require("path")
 
 
-
-
 // Extraer los archivos
 const archiDoc = (pathFile) => {
 	return new Promise((resolve, reject) => {
